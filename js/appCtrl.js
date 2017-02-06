@@ -4,7 +4,7 @@
 
     var date = new Date();
     var month = date.getMonth()+1;
-    var urlstr = "http://wthrcdn.etouch.cn/weather_mini?city=%E5%8C%97%E4%BA%AC";
+    var urlstr = "//wthrcdn.etouch.cn/weather_mini?city=%E5%8C%97%E4%BA%AC";
     var locationPannel = document.getElementById("location");
     var cityPannel = document.getElementById("cityPannel");
     var closeTag = cityPannel.getElementsByTagName("i")[0];

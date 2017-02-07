@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
     <meta charset="UTF-8">
     <title>Weather Forecast</title>
     <link rel="stylesheet" href="//at.alicdn.com/t/font_i0znwunutxs10pb9.css">
@@ -9,9 +10,11 @@
 <body>
     <div class="wrap">
         <div id="location" class="menu">
-            北京
+            <span>北京</span>
             <div id="cityPannel">
-                <i class="iconfont font-45 icon-icon25959"></i>
+                <i class="iconfont font-45 icon-icon25959 cursor"></i>
+                <input id="citySelector" type="text" placeholder="北京">
+                <button>看天气去咯（material design 按钮样式）</button>
             </div>
 
         </div>

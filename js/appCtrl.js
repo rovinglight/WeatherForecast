@@ -4,35 +4,54 @@
 
     var date = new Date();
     var month = date.getMonth()+1;
-    var urlstr = "//wthrcdn.etouch.cn/weather_mini?city=%E5%8C%97%E4%BA%AC";
+    var urlstr = "//wthrcdn.etouch.cn/weather_mini?city=";
     var locationPannel = document.getElementById("location");
     var cityPannel = document.getElementById("cityPannel");
     var closeTag = cityPannel.getElementsByTagName("i")[0];
+    var citySelector = document.getElementById("citySelector");
+
+
+    //初始化
+    loadXMLDoc(urlstr + "%E5%8C%97%E4%BA%AC",function () {});
+    citySelector.value = "北京";
+    //事件
+
+    //切换城市按钮点击
+    citySelector.nextElementSibling.addEventListener("click",changeCity);
+    //关闭城市选择面板
     closeTag.addEventListener("click",closeCity);
-    locationPannel.addEventListener("click",changeCity);
-
-
-    loadXMLDoc(urlstr);
-
-
+    //打开城市选择面板
+    locationPannel.addEventListener("click",openCity);
 
     //tools
+
+    //更换城市
+    function changeCity(){
+        var city = citySelector.value;
+        var status = loadXMLDoc(urlstr + city,function(){
+            closeCity();
+        });
+    }
     //收起城市变换面板
-    function closeCity(e){
+    function closeCity(){
         locationPannel.className = "menu_closed menu";
         cityPannel.style.display = "none";
-        e.stopPropagation()
+        locationPannel.children[0].style.display = "inline";
+        setTimeout(function(){
+            locationPannel.addEventListener("click",openCity);
+        },1500)
     }
     //弹出城市变换面板
-    function changeCity(){
+    function openCity(){
         locationPannel.className = "menu_opened";
+        locationPannel.children[0].style.display = "none";
         setTimeout(function(){
             cityPannel.style.display = "block";
         },1000);
-
+        locationPannel.removeEventListener("click",openCity);
     }
     //获取天气数据并展现
-    function loadXMLDoc(urlstr) {
+    function loadXMLDoc(urlstr,callback) {
         var xmlhttp;
         if (window.XMLHttpRequest) {
             // code for IE7+, Firefox, Chrome, Opera, Safari
@@ -48,7 +67,8 @@
         function weatherFetcher(){
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
                 var obj = JSON.parse(xmlhttp.responseText);
-                var forecast = obj.data.forecast;
+                var status = obj.desc;
+                var city = citySelector.value;
                 var datestr;
                 var i;
                 var card;
@@ -58,13 +78,19 @@
                 var use;
                 var temp;
                 card = document.getElementsByClassName("sig");
+                console.log(status);
+
+                //判断城市是否正确
+                if(status != "OK"){
+                    alert("请输入正确的城市");
+                    return "fuckedUp";
+                }
+                //获取天气数据
+                var forecast = obj.data.forecast;
                 console.log(forecast);
 
-
-
-
-
                 //将天气数据插入网页
+                locationPannel.firstElementChild.innerHTML = city;
                 for(i = 0; i < forecast.length; i++){
                     //文字描述部分
                     span = card[i].getElementsByTagName("span");
@@ -93,6 +119,7 @@
                 //插入网页结束
             }
         }
+        callback();
     }
     //天气字符串转至对应编码
     function iconSwitcher(str){
@@ -105,6 +132,16 @@
                 return "icon-icon-test1";
             case "小雪":
                 return "icon-icon-test9";
+            case "阵雨":
+                return "icon-icon-test5";
+            case "小雨":
+                return "icon-icon-test3";
+            case "雨夹雪":
+                return "icon-icon-test11";
+            case "阵雪":
+                return "icon-icon-test10";
+            case "中雪":
+                return "icon-icon-test10";
         };
 
     }

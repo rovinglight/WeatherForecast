@@ -157,7 +157,9 @@
             frag.appendChild(numNode);
             num = -num;
         }
-        if(num == 0)
+        if(num == 0){
+            numArr[0] = 0;
+        }
         while(num >= 1){
             numArr[j] =parseInt(num % 10) ;
             num=num/10;

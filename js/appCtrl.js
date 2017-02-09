@@ -78,12 +78,11 @@
                 var use;
                 var temp;
                 card = document.getElementsByClassName("sig");
-                console.log(status);
 
                 //判断城市是否正确
                 if(status != "OK"){
                     alert("请输入正确的城市");
-                    return "fuckedUp";
+                    return;
                 }
                 //获取天气数据
                 var forecast = obj.data.forecast;
@@ -111,15 +110,16 @@
                     span[2].appendChild(numSwitcher(str));
                     str = forecast[i]["low"];
                     temp = str.split(" ")[1];
+                    console.log(temp.substring(0,temp.length-1));
                     str = parseInt(temp.substring(0,temp.length-1));
                     span[3].innerHTML = "";
                     span[3].appendChild(numSwitcher(str));
                 }
-
+                callback();
                 //插入网页结束
             }
         }
-        callback();
+
     }
     //天气字符串转至对应编码
     function iconSwitcher(str){
@@ -157,7 +157,8 @@
             frag.appendChild(numNode);
             num = -num;
         }
-        while(num > 1){
+        if(num == 0)
+        while(num >= 1){
             numArr[j] =parseInt(num % 10) ;
             num=num/10;
             j++;

@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
     <meta charset="UTF-8">
     <title>Weather Forecast</title>
-    <link rel="stylesheet" href="//at.alicdn.com/t/font_i0znwunutxs10pb9.css">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_6mtliediev04fgvi.css">
     <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
@@ -13,8 +13,15 @@
             <span>北京</span>
             <div id="cityPannel">
                 <i class="iconfont font-45 icon-icon25959 cursor"></i>
-                <input id="citySelector" type="text" placeholder="北京">
-                <button>看天气去咯（material design 按钮样式）</button>
+                <div class="cityPannel_content">
+                    <h2 class="cityPannel_tittle">
+                        输入你想要查询的城市-只支持国内的哦～
+                    </h2>
+                    <input class="cityPannel_input" id="citySelector" type="text" placeholder="北京">
+
+                    <button class="mdc-button cityPannel_button"><i class="iconfont font-45 icon-jiantou cursor"></i></button>
+                </div>
+
             </div>
 
         </div>
@@ -141,7 +148,7 @@
         </div>
 
     </div>
-<script src="//at.alicdn.com/t/font_i0znwunutxs10pb9.js"></script>
+<script src="//at.alicdn.com/t/font_6mtliediev04fgvi.js"></script>
 <script src="js/appCtrl.js"></script>
 </body>
 </html>

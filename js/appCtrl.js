@@ -47,7 +47,7 @@
         locationPannel.children[0].style.display = "none";
         setTimeout(function(){
             cityPannel.style.display = "block";
-        },1000);
+        },700);
         locationPannel.removeEventListener("click",openCity);
     }
     //获取天气数据并展现

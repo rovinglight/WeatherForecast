@@ -101,7 +101,7 @@
                     wicon = card[i].getElementsByTagName("svg")[0];
                     use = wicon.children[0];
                     var str = "#" + iconSwitcher(forecast[i]["type"]);
-                    use.setAttribute("href",str);
+                    use.setAttribute("xlink:href",str);
                     //高低温
                     str = forecast[i]["high"];
                     temp = str.split(" ")[1];

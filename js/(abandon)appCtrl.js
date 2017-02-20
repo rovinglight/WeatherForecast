@@ -2,6 +2,8 @@
 (function(){
     "use strict";
 
+    /*----------variable declaration----------------*/
+
     var date = new Date();
     var month = date.getMonth()+1;
     var urlstr = "//wthrcdn.etouch.cn/weather_mini?city=";
@@ -10,11 +12,12 @@
     var closeTag = cityPannel.getElementsByTagName("i")[0];
     var citySelector = document.getElementById("citySelector");
 
+    /*------------------init-------------------------*/
 
-    //初始化
     loadXMLDoc(urlstr + "%E5%8C%97%E4%BA%AC",function () {});
     citySelector.value = "北京";
-    //事件
+
+    /*-----------------events----------------------*/
 
     //切换城市按钮点击
     citySelector.nextElementSibling.addEventListener("click",changeCity);
@@ -23,7 +26,7 @@
     //打开城市选择面板
     locationPannel.addEventListener("click",openCity);
 
-    //tools
+    /*------------------tools-------------------------*/
 
     //更换城市
     function changeCity(){
@@ -90,7 +93,7 @@
 
                 //将天气数据插入网页
                 locationPannel.firstElementChild.innerHTML = city;
-                for(i = 0; i < forecast.length; i++){
+                for(i = 0; i < card.length; i++){
                     //文字描述部分
                     span = card[i].getElementsByTagName("span");
                     datestr = month+"月"+forecast[i].date;
@@ -142,6 +145,8 @@
                 return "icon-icon-test10";
             case "中雪":
                 return "icon-icon-test10";
+            case "中雨":
+                return "icon-icon-test2";
         };
 
     }

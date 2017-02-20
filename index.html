@@ -17,7 +17,7 @@
                     <h2 class="cityPannel_tittle">
                         输入你想要查询的城市-只支持国内的哦～
                     </h2>
-                    <input class="cityPannel_input" id="citySelector" type="text" placeholder="北京">
+                    <input class="cityPannel_input" id="citySelector" type="text" placeholder="输入想要查询的城市">
 
                     <button class="mdc-button cityPannel_button"><i class="iconfont font-45 icon-jiantou cursor"></i></button>
                 </div>
@@ -145,12 +145,39 @@
                 </div>
             </div>
             <div class="today card">
-                
+
             </div>
         </div>
 
     </div>
+
+    <div id="template">
+        <div id="temp_singleDay" class="today card template">
+            <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-sun"></use>
+            </svg>
+            <br>
+            <span>2月2日，今天</span>
+            <br>
+            <span>晴，5摄氏度，5级东南风</span>
+            <div class="tem">
+                <i class="iconfont font-45 icon-zuigao"></i>
+                <span>
+                        <i class="iconfont font-45 icon-5"></i>
+                    </span>
+            </div>
+            <div class="wind">
+
+                <i class="iconfont font-45 icon-zuidi"></i>
+                <span>
+                        <i class="iconfont font-45 icon-5"></i>
+                    </span>
+
+
+            </div>
+        </div>
+    </div>
 <script src="//at.alicdn.com/t/font_6mtliediev04fgvi.js"></script>
-<script src="js/appCtrl.js"></script>
+<script src="js/indexCtrl.js"></script>
 </body>
 </html>

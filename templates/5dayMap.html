@@ -8,20 +8,84 @@
             margin: 0;
             padding:0;
         }
+        body{
+            background: linear-gradient(to bottom left,#59c398,#52acc6);
+            height:900px;
+        }
+        .today{
+            float: left;
+            width:300px;
+            height:300px;
+            text-align: center;
+            line-height: 30px;
+            position: relative;
+            margin:5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+
+        }
+        .five_tittle{
+            float: left;
+            margin-top: 30px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+            padding: 5px 10px;
+            font-size: 24px;
+            color: #555555;
+            background-color: white;
+            opacity: 0.8;
+        }
     </style>
 </head>
 <body>
 
+<div class="today">
+    <div class="five_tittle">
+        5日天气趋势预报
+    </div>
+    <svg width="100%" height="115px" version="1.1"
+         xmlns="http://www.w3.org/2000/svg">
+
+        <polyline points="300,150 240,120 120,190 60,180 0,110"
+                  style="fill:none;stroke:#eebbbe;stroke-width:2"/>
+
+        <circle class="circle" cx="300" cy="150" r="2" stroke="#eebbbe"
+                stroke-width="2" fill="#eebbbe">
+        </circle>
+    </svg>
+    <svg width="100%" height="115px" version="1.1"
+         xmlns="http://www.w3.org/2000/svg">
+        <polyline points="300,150 240,120 120,190 60,180 0,110"
+                  style="fill:none;stroke:#eebbbe;stroke-width:2"/>
+    </svg>
+</div>
 
 
-<svg width="100%" height="500px" version="1.1"
-     xmlns="http://www.w3.org/2000/svg">
-
-    <polygon points="0,500 400,500 0,0"
-             style="fill:#cccccc;
-stroke:#000000;stroke-width:1"/>
-</svg>
-
-
+<script>
+    var hArr = [-8,-7,-5,-7,-2];
+    var lArr = [-21,-19,-19,-17,-15];
+    hArr = tempToPx(hArr);
+    lArr = tempToPx(lArr);
+    function tempToPx(arr){
+        var minT = Math.min.apply(Math,arr);
+        var str = "";
+        for(var i = 0; i < arr.length; i++){
+            arr[i] -= minT;
+        }
+        var maxT = Math.max.apply(Math,arr);
+        var ratio = 115/maxT;
+        for(var i = 0; i < arr.length; i++){
+            arr[i] = parseInt(ratio * arr[i]);
+            str += (300-75*i) + "," + (115-arr[i]) + " ";
+        }
+        return str;
+    }
+    function render(harr,larr){
+        var svg = document.getElementsByTagName("svg");
+        var hline = svg[0].children[0];
+        var lline = svg[1].children[0];
+        hline.setAttribute("points",harr);
+        lline.setAttribute("points",larr);
+    }
+    render(hArr,lArr);
+</script>
 </body>
 </html>

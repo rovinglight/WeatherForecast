@@ -1,14 +1,8 @@
 ;
 (function(){
     "use strict";
-    /*-----------init-----------------*/
-    var dataFetcher = new DataFetcher();
-    dataFetcher.updateData("%E5%8C%97%E4%BA%AC", function(){});
-    var cardArr = [new Card("singleDay"),new Card("singleDay"),new Card("singleDay"),new Card("singleDay"),new Card("singleDay")];
-    cityPannel.init();
-    /*-----------init-----------------*/
-
     /*--------cardArr-------------*/
+    var cardArr = [new Card("singleDay"),new Card("singleDay"),new Card("singleDay"),new Card("singleDay"),new Card("singleDay")];
     cardArr.render = function(){
         var singleDay_count = 0;
         var content = document.getElementsByClassName("content")[0];
@@ -27,6 +21,7 @@
     /*--------cardArr-------------*/
 
     /*----------city pannel------------------*/
+    //城市切换面板对象
     var cityPannel = (function(){
         var cityPannel = document.getElementById("cityPannel");
         var citySelector = document.getElementById("citySelector");
@@ -37,6 +32,7 @@
             var city = citySelector.value;
             var status = dataFetcher.updateData(city,function(){
                 closeCity();
+                locationPannel.firstElementChild.innerHTML = city;
             });
         }
         //收起城市变换面板
@@ -73,6 +69,7 @@
     /*----------city pannel------------------*/
 
     /*------------data fetcher------------*/
+    //数据获取对象
     function DataFetcher() {
         var urlstr = "//wthrcdn.etouch.cn/weather_mini?city=";
         var self = this;
@@ -89,6 +86,7 @@
                         alert("请输入正确的城市");
                         return;
                     }
+
                     //遍历全局卡片数组进行渲染
                     cardArr.render();
                     callback();
@@ -111,6 +109,7 @@
     /*------------data fetcher------------*/
 
     /*------------card class--------------*/
+    //卡片模版
     function Card(type){
         this.type = type;
         var htmlNode = {};
@@ -136,6 +135,8 @@
                     return "icon-icon-test10";
                 case "中雨":
                     return "icon-icon-test2";
+                case "大雨":
+                    return "icon-icon-test4";
             };
         }
         function numSwitcher(num){
@@ -209,4 +210,12 @@
         }
     }
     /*------------card class--------------*/
+
+    //暴露对象：dataFetcher(数据获取)、cardArr(卡片对象数组)、cityPannel(事件绑定)
+    /*-----------init-----------------*/
+    var dataFetcher = new DataFetcher();
+    dataFetcher.updateData("%E5%8C%97%E4%BA%AC", function(){});
+    cityPannel.init();
+    /*-----------init-----------------*/
+
 })();
